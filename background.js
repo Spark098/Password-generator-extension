@@ -1,6 +1,7 @@
 const characterAmountRange = document.getElementById('characterAmountRange')
 const characterAmountNumber = document.getElementById('characterAmountNumber')
-const includeUppercaseElement = document.getElementById('includeUppercase')
+const includeUppercaseElement = document.getElementById('includeUppercase') 
+const includeLowercaseElement = document.getElementById('includeLowercase') 
 const includeNumbersElement = document.getElementById('includeNumbers')
 const includeSymbolsElement = document.getElementById('includeSymbols')
 const form = document.getElementById('passwordGeneratorForm')
@@ -16,6 +17,7 @@ const SYMBOL_CODES = arrayFromLowToHigh(33, 47).concat(
 ).concat(
   arrayFromLowToHigh(123, 126)
 )
+console.log(UPPERCASE_CODES)
 
 characterAmountNumber.addEventListener('input', inputCharacterAmount)
 characterAmountRange.addEventListener('input', inputCharacterAmount)
@@ -24,14 +26,16 @@ form.addEventListener('submit', e => {
   e.preventDefault()
   const characterAmount = characterAmountNumber.value
   const includeUppercase = includeUppercaseElement.checked
+  const includeLowercase = includeLowercaseElement.checked
   const includeNumbers = includeNumbersElement.checked
   const includeSymbols = includeSymbolsElement.checked
-  const password = generatePassword(characterAmount, includeUppercase, includeNumbers, includeSymbols)
+  const password = generatePassword(characterAmount, includeUppercase, includeLowercase, includeNumbers, includeSymbols)
   passwordDisplay.innerText = password
 })
 
-function generatePassword(characterAmount, includeUppercase, includeNumbers, includeSymbols) {
-  let charCodes = LOWERCASE_CODES
+function generatePassword(characterAmount, includeUppercase, includeLowercase, includeNumbers, includeSymbols) {
+  let charCodes=[];
+  if (includeLowercase) charCodes = charCodes.concat(LOWERCASE_CODES)
   if (includeUppercase) charCodes = charCodes.concat(UPPERCASE_CODES)
   if (includeSymbols) charCodes = charCodes.concat(SYMBOL_CODES)
   if (includeNumbers) charCodes = charCodes.concat(NUMBER_CODES)
