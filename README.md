@@ -1,5 +1,5 @@
 
-# Project Title
+# Password-generator-extension
 
 A simple chrome extension for generating strong passwrods.
 
